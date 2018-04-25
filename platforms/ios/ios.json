@@ -1,0 +1,108 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+              "count": 1
+            }
+          ],
+          "/widget": [
+            {
+              "xml": "<feature name=\"BLE\"><param name=\"ios-package\" onload=\"true\" value=\"BLECentralPlugin\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "*-Info.plist": {
+        "parents": {
+          "NSLocationWhenInUseUsageDescription": [
+            {
+              "xml": "<string>need location access to find things nearby</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
+            }
+          ],
+          "NSBluetoothPeripheralUsageDescription": [
+            {
+              "xml": "<string> </string>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-ble-central": {
+      "BLUETOOTH_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "cordova-plugin-geolocation.Coordinates",
+      "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "Coordinates"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "PositionError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.Position",
+      "file": "plugins/cordova-plugin-geolocation/www/Position.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "Position"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "navigator.geolocation"
+      ]
+    },
+    {
+      "id": "cordova-plugin-ble-central.ble",
+      "file": "plugins/cordova-plugin-ble-central/www/ble.js",
+      "pluginId": "cordova-plugin-ble-central",
+      "clobbers": [
+        "ble"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-whitelist": "1.3.3",
+    "cordova-plugin-geolocation": "4.0.1",
+    "cordova-plugin-compat": "1.2.0",
+    "cordova-plugin-ble-central": "1.1.4"
+  }
+}

@@ -1,0 +1,488 @@
+{
+  "routes": [
+    {
+      "geometry": "a}qwFlzrbMv@n@oA~C~BlByD|J",
+      "legs": [
+        {
+          "summary": "Mercer Street, West 4th Street",
+          "weight": 285.7,
+          "duration": 285.7,
+          "steps": [
+            {
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [
+                    true
+                  ],
+                  "bearings": [
+                    213
+                  ],
+                  "location": [
+                    -73.993512,
+                    40.729285
+                  ]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": "a}qwFlzrbMv@n@",
+              "mode": "walking",
+              "maneuver": {
+                "bearing_after": 213,
+                "bearing_before": 0,
+                "location": [
+                  -73.993512,
+                  40.729285
+                ],
+                "polygon": [
+                  [
+                    -73.99410009384155,
+                    40.729079990103116
+                  ],
+                  [
+                    -73.99304866790771,
+                    40.729079990103116
+                  ],
+                  [
+                    -73.99304866790771,
+                    40.730185708117375
+                  ],
+                  [
+                    -73.99410009384155,
+                    40.730185708117375
+                  ],
+                  [
+                    -73.99410009384155,
+                    40.729079990103116
+                  ]
+                ],
+                "modifier": "right",
+                "type": "depart",
+                "instruction": "Head southwest on Broadway"
+              },
+              "weight": 28.4,
+              "duration": 28.4,
+              "name": "Broadway",
+              "distance": 36.6
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [
+                    false,
+                    true,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    210,
+                    300
+                  ],
+                  "location": [
+                    -73.993747,
+                    40.729008
+                  ]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": "i{qwF|{rbMoA~C",
+              "mode": "walking",
+              "maneuver": {
+                "bearing_after": 302,
+                "bearing_before": 212,
+                "location": [
+                  -73.993747,
+                  40.729008
+                ],
+                "polygon": [
+                  [
+                    -73.99386137723921,
+                    40.728951937013605
+                  ],
+                  [
+                    -73.99363338947296,
+                    40.728951937013605
+                  ],
+                  [
+                    -73.99363338947296,
+                    40.72911251148343
+                  ],
+                  [
+                    -73.99386137723921,
+                    40.72911251148343
+                  ],
+                  [
+                    -73.99386137723921,
+                    40.728951937013605
+                  ]  
+                ],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right onto Washington Place"
+              },
+              "weight": 58.1,
+              "duration": 58.1,
+              "name": "Washington Place",
+              "distance": 80.7
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [
+                    true,
+                    false,
+                    true,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    120,
+                    210,
+                    300
+                  ],
+                  "location": [
+                    -73.994547,
+                    40.729406
+                  ]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [
+                    false,
+                    true,
+                    true,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    120,
+                    210,
+                    300
+                  ],
+                  "location": [
+                    -73.995061,
+                    40.72881
+                  ]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": "y}qwF|`sbMlB|AHFFF",
+              "mode": "walking",
+              "maneuver": {
+                "bearing_after": 212,
+                "bearing_before": 302,
+                "location": [
+                  -73.994547,
+                  40.729406
+                ],
+                "polygon": [
+                  [
+                    -73.99465799331665,
+                    40.729299509111804
+                  ],
+                  [
+                    -73.99438977241516,
+                    40.729299509111804
+                  ],
+                  [
+                    -73.99438977241516,
+                    40.72953122283535
+                  ],
+                  [
+                    -73.99465799331665,
+                    40.72953122283535
+                  ],
+                  [
+                    -73.99465799331665,
+                    40.729299509111804
+                  ]
+                ],
+                "modifier": "left",
+                "type": "turn",
+                "instruction": "Turn left onto Mercer Street"
+              },
+              "weight": 61.1,
+              "duration": 61.1,
+              "name": "Mercer Street",
+              "distance": 84.9
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [
+                    false,
+                    true,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    210,
+                    300
+                  ],
+                  "location": [
+                    -73.995098,
+                    40.728767
+                  ]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [
+                    false,
+                    true,
+                    true
+                  ],
+                  "bearings": [
+                    120,
+                    285,
+                    300
+                  ],
+                  "location": [
+                    -73.995503,
+                    40.728964
+                  ]
+                },
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [
+                    true,
+                    false,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    120,
+                    300
+                  ],
+                  "location": [
+                    -73.995806,
+                    40.729113
+                  ]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [
+                    false,
+                    true,
+                    true
+                  ],
+                  "bearings": [
+                    120,
+                    210,
+                    300
+                  ],
+                  "location": [
+                    -73.99585,
+                    40.729135
+                  ]
+                },
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [
+                    true,
+                    false,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    120,
+                    300
+                  ],
+                  "location": [
+                    -73.995915,
+                    40.729167
+                  ]
+                },
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [
+                    true,
+                    false,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    120,
+                    300
+                  ],
+                  "location": [
+                    -73.996549,
+                    40.729479
+                  ]
+                },
+                {
+                  "out": 3,
+                  "in": 1,
+                  "entry": [
+                    true,
+                    false,
+                    true,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    120,
+                    210,
+                    300
+                  ],
+                  "location": [
+                    -73.996615,
+                    40.729509
+                  ]
+                },
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [
+                    true,
+                    false,
+                    true
+                  ],
+                  "bearings": [
+                    30,
+                    120,
+                    300
+                  ],
+                  "location": [
+                    -73.996683,
+                    40.72954
+                  ]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": "yyqwFjdsbMGN]~@]|@EFEL}@|BELEJ_@`A",
+              "mode": "walking",
+              "maneuver": {
+                "bearing_after": 302,
+                "bearing_before": 212,
+                "location": [
+                  -73.995098,
+                  40.728767
+                ],
+                "polygon":[
+                  [
+                    -73.99522662162781,
+                    40.72868160190436
+                  ],
+                  [
+                    -73.99492084980011,
+                    40.72868160190436
+                  ],
+                  [
+                    -73.99492084980011,
+                    40.72892551332955
+                  ],
+                  [
+                    -73.99522662162781,
+                    40.72892551332955
+                  ],
+                  [
+                    -73.99522662162781,
+                    40.72868160190436
+                  ]
+                ],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right onto West 4th Street"
+              },
+              "weight": 138.10000000000002,
+              "duration": 138.10000000000002,
+              "name": "West 4th Street",
+              "distance": 191.8
+            },
+            {
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [
+                    true
+                  ],
+                  "bearings": [
+                    123
+                  ],
+                  "location": [
+                    -73.997011,
+                    40.729701
+                  ]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": "s_rwFhpsbM",
+              "mode": "walking",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 303,
+                "location": [
+                  -73.997011,
+                  40.729701
+                ],
+                "polygon":[
+                  [
+                    -73.9972597360611,
+                    40.7295108971024
+                  ],
+                  [
+                    -73.99665892124176,
+                    40.7295108971024
+                  ],
+                  [
+                    -73.99665892124176,
+                    40.729958061792885
+                  ],
+                  [
+                    -73.9972597360611,
+                    40.729958061792885
+                  ],
+                  [
+                    -73.9972597360611,
+                    40.7295108971024
+                  ]
+                ],
+                "type": "arrive",
+                "instruction": "You have arrived at your destination"
+              },
+              "weight": 0,
+              "duration": 0,
+              "name": "Washington Square South",
+              "distance": 0
+            }
+          ],
+          "distance": 394
+        }
+      ],
+      "weight_name": "duration",
+      "weight": 285.7,
+      "duration": 285.7,
+      "distance": 394
+    }
+  ],
+  "waypoints": [
+    {
+      "name": "Broadway",
+      "location": [
+        -73.993512,
+        40.729285
+      ]
+    },
+    {
+      "name": "Washington Square South",
+      "location": [
+        -73.997011,
+        40.729701
+      ]
+    }
+  ],
+  "code": "Ok",
+  "uuid": "cjge9d6a0002u4jo68f1rx29z"
+}
