@@ -46,6 +46,8 @@ function sendLeft(){
     array[3]=49; //1 for pressed
 
     var data = array.buffer;
+    console.log(array.buffer);
+    console.log(array);
     return data;
 }
 
@@ -57,6 +59,8 @@ function sendRight(){
     array[3]=49; //1 for pressed
 
     var data = array.buffer;
+    console.log(array.buffer);
+    console.log(array);
     return data;
 }
 
@@ -195,7 +199,10 @@ var app = {
         };
 
         var data = stringToBytes(messageInput.value);
+        
         var deviceId = event.target.dataset.deviceId;
+
+        resultDiv.innerHTML = resultDiv.innerHTML + "ID: " + deviceId + "<br/>";
 
         if (app.writeWithoutResponse) {
             ble.writeWithoutResponse(
@@ -312,13 +319,15 @@ function watchPosition() {
             document.getElementById("show-type").innerHTML = typeDirection;
 
             if (modifierDirection == "left") {
-                var data = sendLeft();
-                console.log("Send Left" + data);
+                //var data = sendLeft();
+                //console.log("Send Left" + data);
+
+                console.log("right success");
 
                 // BLE code
                 var success = function() {
                     console.log("success");
-                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "left";
+                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + 'L' + "<br/>";
                     resultDiv.scrollTop = resultDiv.scrollHeight;
                 };
 
@@ -326,23 +335,44 @@ function watchPosition() {
                     alert("Failed writing data to the bluefruit le");
                 };
 
+                var data = stringToBytes('L');
+                
                 var deviceId = event.target.dataset.deviceId;
 
-                ble.write(
-                    deviceId,
-                    bluefruit.serviceUUID,
-                    bluefruit.txCharacteristic,
-                    data, success, failure
-                );
+                if (app.writeWithoutResponse) {
+                    ble.writeWithoutResponse(
+                        deviceId,
+                        bluefruit.serviceUUID,
+                        bluefruit.txCharacteristic,
+                        data, success, failure
+                    );
+                } else {
+                    ble.write(
+                        deviceId,
+                        bluefruit.serviceUUID,
+                        bluefruit.txCharacteristic,
+                        data, success, failure
+                    );
+                }
 
             } else if (modifierDirection == "right") {
-                var data = sendRight();
-                console.log("Send Right" + data);
+
+                //var  data = new Uint8Array[33,66,55,48];
+                    // array[0]=33; //spacing
+                    // array[1]=66; //'B'
+                    // array[2]=55; //7 for left button
+                    // array[3]=48; //1 for pressed
+
+                  //  var data = array.buffer;
+                //var data = [33,66,56,49];
+                //console.log("Send Right" + data);
+
+                console.log("right success");
 
                 // BLE code
                 var success = function() {
                     console.log("success");
-                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "right";
+                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + 'R' + "<br/>";
                     resultDiv.scrollTop = resultDiv.scrollHeight;
                 };
 
@@ -350,14 +380,25 @@ function watchPosition() {
                     alert("Failed writing data to the bluefruit le");
                 };
 
+                var data = stringToBytes('R');
+                
                 var deviceId = event.target.dataset.deviceId;
 
-                ble.write(
-                    deviceId,
-                    bluefruit.serviceUUID,
-                    bluefruit.txCharacteristic,
-                    data, success, failure
-                );
+                if (app.writeWithoutResponse) {
+                    ble.writeWithoutResponse(
+                        deviceId,
+                        bluefruit.serviceUUID,
+                        bluefruit.txCharacteristic,
+                        data, success, failure
+                    );
+                } else {
+                    ble.write(
+                        deviceId,
+                        bluefruit.serviceUUID,
+                        bluefruit.txCharacteristic,
+                        data, success, failure
+                    );
+                }
             }
             break;
         }
