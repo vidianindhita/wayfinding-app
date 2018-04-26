@@ -17,94 +17,92 @@
  * under the License.
  */
 
+'use strict';
 var watchID;
 var geoLoc;
 var curLat;
 var curLng;
 var count = 1;
 
-// document.addEventListener("deviceready", onDeviceReady, false);
-// function onDeviceReady() {
-//     console.log("navigator.geolocation works well");
-//     document.getElementById("getPosition").addEventListener("click", getPosition);
-//     document.getElementById("watchPosition").addEventListener("click", watchPosition);  
-// }
+// ASCII only
+function bytesToString(buffer) {
+    return String.fromCharCode.apply(null, new Uint8Array(buffer));
+}
 
-// function getPosition() {
-//    var options = {
-//       enableHighAccuracy: true,
-//       maximumAge: 3600000
-//    }
-//    var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+// ASCII only
+function stringToBytes(string) {
+    var array = new Uint8Array(string.length);
+    for (var i = 0, l = string.length; i < l; i++) {
+        array[i] = string.charCodeAt(i);
+    }
+    return array.buffer;
+}
 
-//    function onSuccess(position) {
-//       alert('Latitude: '          + position.coords.latitude          + '\n' +
-//          'Longitude: '         + position.coords.longitude         + '\n' +
-//          'Altitude: '          + position.coords.altitude          + '\n' +
-//          'Accuracy: '          + position.coords.accuracy          + '\n' +
-//          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-//          'Heading: '           + position.coords.heading           + '\n' +
-//          'Speed: '             + position.coords.speed             + '\n' +
-//          'Timestamp: '         + position.timestamp                + '\n');
-//    };
+function sendLeft(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=55; //7 for left button
+    array[3]=49; //1 for pressed
 
-//    function onError(error) {
-//       alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-//    }
-// }
+    var data = array.buffer;
+    return data;
+}
 
-// function watchPosition() {
-//    var options = {
-//       maximumAge: 3600000,
-//       timeout: 3000,
-//       enableHighAccuracy: true,
-//    }
-//    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+function sendRight(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=56; //8 for left button
+    array[3]=49; //1 for pressed
 
-//    function onSuccess(position) {
-//       alert('Latitude: '          + position.coords.latitude          + '\n' +
-//          'Longitude: '         + position.coords.longitude         + '\n' +
-//          'Altitude: '          + position.coords.altitude          + '\n' +
-//          'Accuracy: '          + position.coords.accuracy          + '\n' +
-//          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-//          'Heading: '           + position.coords.heading           + '\n' +
-//          'Speed: '             + position.coords.speed             + '\n' +
-//          'Timestamp: '         + position.timestamp                + '\n');
-//    };
+    var data = array.buffer;
+    return data;
+}
 
-//    function onError(error) {
-//       alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
-//    }
-// }
+function releasedLeft(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=55; //7 for left button
+    array[3]=48; //1 for pressed
 
-// onSuccess Callback
-// This method accepts a Position object, which contains the
-// current GPS coordinates
-//
-// var onSuccess = function(position) {
-//     alert('Latitude: '          + position.coords.latitude          + '\n' +
-//           'Longitude: '         + position.coords.longitude         + '\n' +
-//           'Altitude: '          + position.coords.altitude          + '\n' +
-//           'Accuracy: '          + position.coords.accuracy          + '\n' +
-//           'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-//           'Heading: '           + position.coords.heading           + '\n' +
-//           'Speed: '             + position.coords.speed             + '\n' +
-//           'Timestamp: '         + position.timestamp                + '\n');
-// };
+    var data = array.buffer;
+    return data;
+}
 
-// // onError Callback receives a PositionError object
-// //
-// function onError(error) {
-//     alert('code: '    + error.code    + '\n' +
-//           'message: ' + error.message + '\n');
-// }
+function releasedRight(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=56; //8 for left button
+    array[3]=48; //1 for pressed
 
-// navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    var data = array.buffer;
+    return data;
+}
+
+// this is Nordic's UART service
+var bluefruit = {
+    serviceUUID: '6e400001-b5a3-f393-e0a9-e50e24dcca9e',
+    txCharacteristic: '6e400002-b5a3-f393-e0a9-e50e24dcca9e', // transmit is from the phone's perspective
+    rxCharacteristic: '6e400003-b5a3-f393-e0a9-e50e24dcca9e'  // receive is from the phone's perspective
+};
 
 var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        this.bindEvents();
+        detailPage.hidden = true;
+    },
+
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+        refreshButton.addEventListener('touchstart', this.refreshDeviceList, false);
+        sendButton.addEventListener('click', this.sendData, false);
+        disconnectButton.addEventListener('touchstart', this.disconnect, false);
+        deviceList.addEventListener('touchstart', this.connect, false); // assume not scrolling
     },
 
     // deviceready Event Handler
@@ -112,9 +110,18 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        this.receivedEvent('deviceready');
+        //this.receivedEvent('deviceready');
+        app.refreshDeviceList();
         document.getElementById("getPosition").addEventListener("click", getPosition);
         document.getElementById("watchPosition").addEventListener("click", watchPosition);
+    },
+
+    refreshDeviceList: function() {
+        deviceList.innerHTML = ''; // empties the list
+        ble.scan([bluefruit.serviceUUID], 5, app.onDiscoverDevice, app.onError);
+        
+        // if Android can't find your device try scanning for all devices
+        // ble.scan([], 5, app.onDiscoverDevice, app.onError);
     },
 
     // Update DOM on a Received Event
@@ -127,107 +134,105 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    onDiscoverDevice: function(device) {
+        var listItem = document.createElement('li'),
+            html = '<b>' + device.name + '</b><br/>' +
+                'RSSI: ' + device.rssi + '&nbsp;|&nbsp;' +
+                device.id;
+
+        listItem.dataset.deviceId = device.id;
+        listItem.innerHTML = html;
+        deviceList.appendChild(listItem);
+    },
+    connect: function(e) {
+        var deviceId = e.target.dataset.deviceId,
+            onConnect = function(peripheral) {
+                app.determineWriteType(peripheral);
+
+                // subscribe for incoming data
+                ble.startNotification(deviceId, bluefruit.serviceUUID, bluefruit.rxCharacteristic, app.onData, app.onError);
+                sendButton.dataset.deviceId = deviceId;
+                disconnectButton.dataset.deviceId = deviceId;
+                resultDiv.innerHTML = "";
+                app.showDetailPage();
+            };
+
+        ble.connect(deviceId, onConnect, app.onError);
+    },
+    determineWriteType: function(peripheral) {
+        // Adafruit nRF8001 breakout uses WriteWithoutResponse for the TX characteristic
+        // Newer Bluefruit devices use Write Request for the TX characteristic
+
+        var characteristic = peripheral.characteristics.filter(function(element) {
+            if (element.characteristic.toLowerCase() === bluefruit.txCharacteristic) {
+                return element;
+            }
+        })[0];
+
+        if (characteristic.properties.indexOf('WriteWithoutResponse') > -1) {
+            app.writeWithoutResponse = true;
+        } else {
+            app.writeWithoutResponse = false;
+        }
+
+    },
+    onData: function(data) { // data received from Arduino
+        console.log(data);
+        resultDiv.innerHTML = resultDiv.innerHTML + "Received: " + bytesToString(data) + "<br/>";
+        resultDiv.scrollTop = resultDiv.scrollHeight;
+    },
+    sendData: function(event) { // send data to Arduino
+
+        var success = function() {
+            console.log("success");
+            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + messageInput.value + "<br/>";
+            resultDiv.scrollTop = resultDiv.scrollHeight;
+        };
+
+        var failure = function() {
+            alert("Failed writing data to the bluefruit le");
+        };
+
+        var data = stringToBytes(messageInput.value);
+        var deviceId = event.target.dataset.deviceId;
+
+        if (app.writeWithoutResponse) {
+            ble.writeWithoutResponse(
+                deviceId,
+                bluefruit.serviceUUID,
+                bluefruit.txCharacteristic,
+                data, success, failure
+            );
+        } else {
+            ble.write(
+                deviceId,
+                bluefruit.serviceUUID,
+                bluefruit.txCharacteristic,
+                data, success, failure
+            );
+        }
+
+    },
+    disconnect: function(event) {
+        var deviceId = event.target.dataset.deviceId;
+        ble.disconnect(deviceId, app.showMainPage, app.onError);
+    },
+    showMainPage: function() {
+        mainPage.hidden = false;
+        detailPage.hidden = true;
+    },
+    showDetailPage: function() {
+        mainPage.hidden = true;
+        detailPage.hidden = false;
+    },
+    onError: function(reason) {
+        alert("ERROR: " + JSON.stringify(reason)); // real apps should use notification.alert
     }
-
-    // getPosition: function() {
-    //     var options = {
-    //       enableHighAccuracy: true,
-    //       maximumAge: 3600000
-    //     }
-    //     var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-
-    //     function onSuccess(position) {
-    //       alert('Latitude: '          + position.coords.latitude          + '\n' +
-    //          'Longitude: '         + position.coords.longitude         + '\n' +
-    //          'Altitude: '          + position.coords.altitude          + '\n' +
-    //          'Accuracy: '          + position.coords.accuracy          + '\n' +
-    //          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-    //          'Heading: '           + position.coords.heading           + '\n' +
-    //          'Speed: '             + position.coords.speed             + '\n' +
-    //          'Timestamp: '         + position.timestamp                + '\n');
-    //     };
-
-    //     function onError(error) {
-    //       alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-    //     }
-    // },
-
-    // watchPosition: function() {
-    //     var options = {
-    //       maximumAge: 3600000,
-    //       timeout: 3000,
-    //       enableHighAccuracy: true,
-    //    }
-    //    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-
-    //    function onSuccess(position) {
-    //       alert('Latitude: '          + position.coords.latitude          + '\n' +
-    //          'Longitude: '         + position.coords.longitude         + '\n' +
-    //          'Altitude: '          + position.coords.altitude          + '\n' +
-    //          'Accuracy: '          + position.coords.accuracy          + '\n' +
-    //          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-    //          'Heading: '           + position.coords.heading           + '\n' +
-    //          'Speed: '             + position.coords.speed             + '\n' +
-    //          'Timestamp: '         + position.timestamp                + '\n');
-    //    };
-
-    //    function onError(error) {
-    //       alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
-    //    }
-    // }
 
 };
 
 app.initialize();
-
-// function showLocation(position) {
-//     curLat = position.coords.latitude;
-//     curLng = position.coords.longitude;
-//     //alert("Latitude : " + latitude + " Longitude: " + longitude);
-//     console.log("Latitude : " + curLat + " Longitude: " + curLng);
-//     var stepdata = json.routes[0].legs[0].steps;
-
-//     for (var i=0; i<stepdata.length; i++){
-//         var poly = stepdata[i].maneuver.polygon;
-
-//         var points = turf.points([
-//             [curLng, curLat]
-//             ]);
-
-//         var searchWithin = turf.polygon([poly]);
-//         var pointWithin = turf.pointsWithinPolygon(points, searchWithin);
-//         if (pointWithin){
-//             console.log(stepdata[i].maneuver.instruction);
-//             document.getElementById("result").innerHTML = stepdata[i].maneuver.instruction;
-//             break;
-//         }
-//     }
-// }
-
-// function errorHandler(err) {
-//     if(err.code == 1) {
-//         alert("Error: Access is denied!");
-//     }
-
-//     else if( err.code == 2) {
-//         alert("Error: Position is unavailable!");
-//     }
-// }
-
-// function getLocationUpdate(){
-//     document.getElementById("clicked").innerHTML = "CLICKED";
-//     if(navigator.geolocation){
-//        // timeout at 60000 milliseconds (60 seconds)
-//         var options = {timeout:60000};
-//         geoLoc = navigator.geolocation;
-//         console.log("GeoLoc : " + geoLoc);
-//         watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
-//         console.log("WatchID : " + watchID);    }
-
-//     else{
-//         alert("Sorry, browser does not support geolocation!");
-//     }
-// }
 
 function getPosition() {
     
@@ -294,17 +299,74 @@ function watchPosition() {
 
         var searchWithin = turf.polygon([poly]);
         var pointWithin = turf.pointsWithinPolygon(points, searchWithin);
+        var instructionDirection = stepdata[i].maneuver.instruction;
+        var modifierDirection = stepdata[i].maneuver.modifier;
+        var typeDirection = stepdata[i].maneuver.type;
         if (pointWithin){
-            console.log(stepdata[i].maneuver.instruction);
+            console.log(instructionDirection);
+            console.log(modifierDirection);
+            console.log(typeDirection);
             document.getElementById("show-location-update").innerHTML = 'Latitude: ' + curLat + '\n' +   'Longitude: ' + curLng;
-            document.getElementById("show-instruction").innerHTML = stepdata[i].maneuver.instruction;
+            document.getElementById("show-instruction").innerHTML = instructionDirection;
+            document.getElementById("show-modifier").innerHTML = modifierDirection;
+            document.getElementById("show-type").innerHTML = typeDirection;
+
+            if (modifierDirection == "left") {
+                var data = sendLeft();
+                console.log("Send Left" + data);
+
+                // BLE code
+                var success = function() {
+                    console.log("success");
+                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "left";
+                    resultDiv.scrollTop = resultDiv.scrollHeight;
+                };
+
+                var failure = function() {
+                    alert("Failed writing data to the bluefruit le");
+                };
+
+                var deviceId = event.target.dataset.deviceId;
+
+                ble.write(
+                    deviceId,
+                    bluefruit.serviceUUID,
+                    bluefruit.txCharacteristic,
+                    data, success, failure
+                );
+
+            } else if (modifierDirection == "right") {
+                var data = sendRight();
+                console.log("Send Right" + data);
+
+                // BLE code
+                var success = function() {
+                    console.log("success");
+                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "right";
+                    resultDiv.scrollTop = resultDiv.scrollHeight;
+                };
+
+                var failure = function() {
+                    alert("Failed writing data to the bluefruit le");
+                };
+
+                var deviceId = event.target.dataset.deviceId;
+
+                ble.write(
+                    deviceId,
+                    bluefruit.serviceUUID,
+                    bluefruit.txCharacteristic,
+                    data, success, failure
+                );
+            }
             break;
         }
     }
     };
 
     function onError(error) {
-        alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+        //alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+        console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
         document.getElementById("show-location-update").innerHTML = "NOT SHOWING UPDATE";
         incrementError();
     }

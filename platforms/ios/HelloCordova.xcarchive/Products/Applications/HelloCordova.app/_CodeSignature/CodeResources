@@ -14,11 +14,11 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		lOfz2cF+YWz+re4WFEP90yVZ9Rg=
+		20r075LTuZeaDHVyGx57DJMMbaY=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		57Xmm3RpsYIWGKm8bv+ww9qH6uM=
+		HSI1e1ITMrQ4ywp9aHbYucDPG50=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -26,11 +26,11 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		gxyW1qG+9xFPMBRKAJR8YUtMZAI=
+		B40FV3uYbI+Lrj8tgj6cEgLUo3M=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		4XifbrPbBST7Ntk1EqtoIt0Zo4c=
+		/Pov2k64YNLJifXi0tAnXX/ki80=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -98,7 +98,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		Pgz/eOnED+hFhoM3AvPirLlsgys=
+		ubOXgxnqKrV0YhII8nDguXPLWYQ=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		YFsSQ/lHlcqNGvaNqgAZ7L+qYNE=
+		y+6OHH1IL+wXbysbKbjvqM5zLIk=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -150,7 +150,7 @@
 		</data>
 		<key>www/cordova_plugins.js</key>
 		<data>
-		Xc8dF7byiGtcwHdoHMKkMGEv+M0=
+		VAaDzh7pXt/wlY+vEz/TZ08QsA4=
 		</data>
 		<key>www/css/Icon</key>
 		<data>
@@ -178,7 +178,7 @@
 		</data>
 		<key>www/index.html</key>
 		<data>
-		d6ZJdiLE+hKqY/UtJzwJv4XkjaQ=
+		a6talB03M3io6UXAKKKuc0Bw740=
 		</data>
 		<key>www/js/Icon</key>
 		<data>
@@ -186,11 +186,23 @@
 		</data>
 		<key>www/js/index.js</key>
 		<data>
-		rBfEJKKYpAApBFb/8OoKgEqhxq4=
+		2dpGq+5Hkrh/sVI9o3XxVge51cU=
 		</data>
 		<key>www/plugins/Icon</key>
 		<data>
 		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		</data>
+		<key>www/plugins/cordova-plugin-ble-central/Icon</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		</data>
+		<key>www/plugins/cordova-plugin-ble-central/www/Icon</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		</data>
+		<key>www/plugins/cordova-plugin-ble-central/www/ble.js</key>
+		<data>
+		ttGnwlbP1h1buimQvJMol6MTo4Y=
 		</data>
 		<key>www/plugins/cordova-plugin-geolocation/Icon</key>
 		<data>
@@ -245,22 +257,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lOfz2cF+YWz+re4WFEP90yVZ9Rg=
+			20r075LTuZeaDHVyGx57DJMMbaY=
 			</data>
 			<key>hash2</key>
 			<data>
-			AHI2sLl3eypinmym7mqIRAGWFLbgdA3Jy3J+ZAPHrZs=
+			Wv/BxPxd353fC6fM1znbJRZ/L5/GFABd/IjNSibMTg4=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			57Xmm3RpsYIWGKm8bv+ww9qH6uM=
+			HSI1e1ITMrQ4ywp9aHbYucDPG50=
 			</data>
 			<key>hash2</key>
 			<data>
-			vcVkYzXlVai1LYTW8aDrU+ZfIwlzdxnJQXZRl5WaD9E=
+			DluHe8fCv3oOg/44zSR07gXQ78Rk+kkz69fNW+JG7C4=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -278,11 +290,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gxyW1qG+9xFPMBRKAJR8YUtMZAI=
+			B40FV3uYbI+Lrj8tgj6cEgLUo3M=
 			</data>
 			<key>hash2</key>
 			<data>
-			RLAE3oWKlTAXkaRR+c7LJGj+yDHwZOVbYEDauivpcH4=
+			IAv2P6w0NnGz3NKb+mNcO9slhvD7F5ma9/oxn+C7GkI=
 			</data>
 		</dict>
 		<key>LaunchImage-568h@2x.png</key>
@@ -465,22 +477,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Pgz/eOnED+hFhoM3AvPirLlsgys=
+			ubOXgxnqKrV0YhII8nDguXPLWYQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			PRBs0i0zMbsKOAIp0BszS7dYf77bpgcDW1RCtqOCwnU=
+			4oL2hbiq3xPztTbZXKOz/usQCHc3d35CR+g1apnLOdo=
 			</data>
 		</dict>
 		<key>config.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			YFsSQ/lHlcqNGvaNqgAZ7L+qYNE=
+			y+6OHH1IL+wXbysbKbjvqM5zLIk=
 			</data>
 			<key>hash2</key>
 			<data>
-			HWNQn00M0FYkKmnpXc0SA1U6jPIvXJSjkDYufO27CA8=
+			uL9OILD19qd4un+xu2NHvk80EIrRhFJwgzXg8rXg6/M=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
@@ -597,11 +609,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Xc8dF7byiGtcwHdoHMKkMGEv+M0=
+			VAaDzh7pXt/wlY+vEz/TZ08QsA4=
 			</data>
 			<key>hash2</key>
 			<data>
-			LO1vaxAH1VB61xuCXlIPr4D8OpOHLQ/HlxWBq4Dr/8w=
+			tI6MKh5GKdiUd0URoKVAtDD3rREM0aCvXF1mqfHEP+g=
 			</data>
 		</dict>
 		<key>www/css/Icon</key>
@@ -674,11 +686,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			d6ZJdiLE+hKqY/UtJzwJv4XkjaQ=
+			a6talB03M3io6UXAKKKuc0Bw740=
 			</data>
 			<key>hash2</key>
 			<data>
-			DxnENzpiK4SLgaXJ7kl/i1WdgIU3+rz+CGmihWzel3s=
+			eHTqLCVEEoZGdz2u2aWwrIuSDfRMeaWBJurhkRjw7P0=
 			</data>
 		</dict>
 		<key>www/js/Icon</key>
@@ -696,11 +708,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rBfEJKKYpAApBFb/8OoKgEqhxq4=
+			2dpGq+5Hkrh/sVI9o3XxVge51cU=
 			</data>
 			<key>hash2</key>
 			<data>
-			07T9yY8T7H4Hquakin8sVNCsVcFM1/iS4b43Uboz/o0=
+			s/R8eL2ryU1pz2ntceYiOuFrbXUg1RNxwNZL6aLzXwI=
 			</data>
 		</dict>
 		<key>www/plugins/Icon</key>
@@ -712,6 +724,39 @@
 			<key>hash2</key>
 			<data>
 			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+			</data>
+		</dict>
+		<key>www/plugins/cordova-plugin-ble-central/Icon</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+			</data>
+			<key>hash2</key>
+			<data>
+			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+			</data>
+		</dict>
+		<key>www/plugins/cordova-plugin-ble-central/www/Icon</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+			</data>
+			<key>hash2</key>
+			<data>
+			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+			</data>
+		</dict>
+		<key>www/plugins/cordova-plugin-ble-central/www/ble.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ttGnwlbP1h1buimQvJMol6MTo4Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			tUQ3pAYWALtNTIRx8kSjgL4XnB7nM6Uhbc8rRHCec6U=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-geolocation/Icon</key>

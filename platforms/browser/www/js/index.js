@@ -38,6 +38,50 @@ function stringToBytes(string) {
     return array.buffer;
 }
 
+function sendLeft(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=55; //7 for left button
+    array[3]=49; //1 for pressed
+
+    var data = array.buffer;
+    return data;
+}
+
+function sendRight(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=56; //8 for left button
+    array[3]=49; //1 for pressed
+
+    var data = array.buffer;
+    return data;
+}
+
+function releasedLeft(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=55; //7 for left button
+    array[3]=48; //1 for pressed
+
+    var data = array.buffer;
+    return data;
+}
+
+function releasedRight(){
+    var array = new Uint8Array(4);
+    array[0]=33; //spacing
+    array[1]=66; //'B'
+    array[2]=56; //8 for left button
+    array[3]=48; //1 for pressed
+
+    var data = array.buffer;
+    return data;
+}
+
 // this is Nordic's UART service
 var bluefruit = {
     serviceUUID: '6e400001-b5a3-f393-e0a9-e50e24dcca9e',
@@ -255,10 +299,66 @@ function watchPosition() {
 
         var searchWithin = turf.polygon([poly]);
         var pointWithin = turf.pointsWithinPolygon(points, searchWithin);
+        var instructionDirection = stepdata[i].maneuver.instruction;
+        var modifierDirection = stepdata[i].maneuver.modifier;
+        var typeDirection = stepdata[i].maneuver.type;
         if (pointWithin){
-            console.log(stepdata[i].maneuver.instruction);
+            console.log(instructionDirection);
+            console.log(modifierDirection);
+            console.log(typeDirection);
             document.getElementById("show-location-update").innerHTML = 'Latitude: ' + curLat + '\n' +   'Longitude: ' + curLng;
-            document.getElementById("show-instruction").innerHTML = stepdata[i].maneuver.instruction;
+            document.getElementById("show-instruction").innerHTML = instructionDirection;
+            document.getElementById("show-modifier").innerHTML = modifierDirection;
+            document.getElementById("show-type").innerHTML = typeDirection;
+
+            if (modifierDirection == "left") {
+                var data = sendLeft();
+                console.log("Send Left" + data);
+
+                // BLE code
+                var success = function() {
+                    console.log("success");
+                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "left";
+                    resultDiv.scrollTop = resultDiv.scrollHeight;
+                };
+
+                var failure = function() {
+                    alert("Failed writing data to the bluefruit le");
+                };
+
+                var deviceId = event.target.dataset.deviceId;
+
+                ble.write(
+                    deviceId,
+                    bluefruit.serviceUUID,
+                    bluefruit.txCharacteristic,
+                    data, success, failure
+                );
+
+            } else if (modifierDirection == "right") {
+                var data = sendRight();
+                console.log("Send Right" + data);
+
+                // BLE code
+                var success = function() {
+                    console.log("success");
+                    resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "right";
+                    resultDiv.scrollTop = resultDiv.scrollHeight;
+                };
+
+                var failure = function() {
+                    alert("Failed writing data to the bluefruit le");
+                };
+
+                var deviceId = event.target.dataset.deviceId;
+
+                ble.write(
+                    deviceId,
+                    bluefruit.serviceUUID,
+                    bluefruit.txCharacteristic,
+                    data, success, failure
+                );
+            }
             break;
         }
     }
